@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+
+<img id="logo" src="~/fonts/live-university.png" alt="Logo Live University">
+<form id="form" method="POST">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome" placeholder="Informe o seu Nome">
+    </div>
+    <div class="form-group">
+        <label for="sobrenome">Sobrenome:</label>
+        <input type="text" class="form-control" id="sobrenome" placeholder="Informe o seu Sobrenome">
+    </div>
+    <div class="form-group">
+        <label for="email">Endereço de e-mail:</label>
+        <input type="email" class="form-control" id="email" placeholder="Informe o seu e-mail">
+    </div>
+    <button type="submit" class="btn btn-primary" id="post-form">Enviar</button>
+</form>
+@section scripts {
+    <script>
+        function enviardados() {
+            if (document.form.nome.value == "") {
+                alert("Por favor, informe um Nome válido");
+                document.form.nome.focus();
+                return false;
+            }
+        };
+        function createPessoa(data) {
+            console.log(data);
+            $.ajax({
+                url: "http://localhost:44379/api/pessoa",
+                type: "POST",
+                dataType: "xml/html/script/json",
+                contentType: "application/JSON",
+                data: JSON.stringify(data),
+                complete: function (result) {
+                    console.log(result);
+                    window.location.replace("http://localhost:44379/Home/Detail?codigogerado=" + data.codigogerado.replace(/#/g, "_"));
+                },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log(result);
+                },
+            });
+        }
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let nome = document.querySelector("#nome");
+            let sobrenome = document.querySelector("#sobrenome");
+            let email = document.querySelector("#email");
+
+            let dados = {
+                nome: nome.value,
+                sobrenome: sobrenome.value,
+                email: email.value
+            };
+
+            $.ajax({
+                url: "http://138.68.29.250:8082/",
+                type: "POST",
+                dataType: "xml/html/script/json", // expected format for response
+                contentType: "application/x-www-form-urlencoded", // send as JSON
+                data: $.param({ nome: dados.nome, sobrenome: dados.sobrenome, email: dados.email }),
+                complete: function (result) {
+                    console.log(result);
+                    dados.codigogerado = result.responseText;
+                    createPessoa(dados);
+                },
+
+                error: function (result) {
+                    // console.log(result);
+                },
+            });
+        })
+    </script>
+}

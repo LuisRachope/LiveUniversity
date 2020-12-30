@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+<div id="inject"></div>
+@section scripts {
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const codigogerado = urlParams.get('codigogerado');
+        console.log(urlParams);
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:44379/api/pessoa?codigogerado=' + codigogerado,    
+            dataType: 'json',
+            success: function (data) {
+                console.log(typeof (data));
+                console.log(data);
+                //data = Object.entries(data);
+
+                let html = '';
+                //for (var i = 0; i < data.length; i++) {
+                    html += `
+                <div class="card-wrapper">
+                  <div class="info-wrapper">
+                      <h6>Nome: ${data.Nome}</h6>
+                      <h6>Sobrenome: ${data.Sobrenome}</h6>
+                      <h6>Email: ${data.Email}</h6>
+                    <hr/>
+                      <h6>Soma Coluna Nome: ${data.SomaNome}</h6>
+                      <h6>Soma Coluna Sobrenome: ${data.SomaSobrenome}</h6>
+                      <h6>Soma Coluna Email: ${data.SomaEmail}</h6>
+                      <h6>Soma Coluna Total: ${data.SomaTotal}</h6> 
+                  </div>
+              </div>
+              `;
+                //}
+
+                html = `<div class="col-md-6  col-sm-12">${html}</div>`
+
+                $('#inject').html(html);
+            },
+            error: function () {
+
+            }
+        })
+    </script>
+}

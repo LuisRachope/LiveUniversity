@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Animais";
+}
+
+<h2>Animais</h2>
+<div id="inject"></div>
+@section scripts {
+    <script>
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:44379/api/animal',
+            dataType: 'json',
+            success: function (data) {
+                console.log(typeof (data));
+                console.log(data);
+
+                let html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html += `
+                    <div class="card-wrapper">
+                      <div class="info-wrapper">
+                          <h6>Id: ${data[i].Id}</h6>
+                          <h6>Animal: ${data[i].Nome}</h6>
+                          <h6>Total: ${data[i].Total}</h6>
+                        <hr/>
+                      </div>
+                  </div>
+                  `;
+                }
+
+                html = `<div class="col-md-6  col-sm-12">${html}</div>`
+
+                $('#inject').html(html);
+            },
+            error: function () {
+
+            }
+        })
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveUniversity", "LiveUniversity\LiveUniversity.csproj", "{381461AC-94D4-48D7-9986-6028C34BDBDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{381461AC-94D4-48D7-9986-6028C34BDBDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{381461AC-94D4-48D7-9986-6028C34BDBDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{381461AC-94D4-48D7-9986-6028C34BDBDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{381461AC-94D4-48D7-9986-6028C34BDBDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CEF3BC4-5346-498E-B426-2914A9CF7036}
+	EndGlobalSection
+EndGlobal
